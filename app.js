@@ -219,6 +219,9 @@ router.get("/article", async (req, res) => {
     const { comment, commentId } = req.body;
     console.log(user)
 
+    if (!comment) {
+      return res.send({ result: "댓글 내용을 입력해주세요"});
+    }
     const [article] = await Articles.find({ authorId });
     if (article) {
       await Comment.create({ nickname:user.nickname, comment, commentId })

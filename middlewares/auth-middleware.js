@@ -13,7 +13,12 @@ module.exports = (req, res, next) => {
         });
         return;
     }
-
+    if (tokenType === 'Bearer') {
+        res.status(401).send({
+            errorMessage: "로그인이 된 상태입니다",
+        });
+        return;
+    }
     try {
         const { userId } = jwt.verify(tokenValue, "my-secret-key");
 
